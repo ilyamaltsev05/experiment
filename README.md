@@ -6,7 +6,9 @@
  1-на-n из единиц со случайной маской подходящего размера.
  - Произведение Кронекера некоторых матриц из SuiteSparse Matrix Collection с построенными с помощью LAGraph_Random_Matrix масками.
  
- Замеры сделаны с помощью heaptrack.
+Замеры сделаны с помощью heaptrack.
+
+Воспроизвести можно с помощью https://github.com/ilyamaltsev05/experiment
 
 ## 1) Вычисление, эквивалентное mxm в PageRank_demo.
 

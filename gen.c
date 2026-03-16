@@ -10,13 +10,13 @@ int main(void) {
     GrB_Matrix vert, ones, Mask;
     uint64_t seed = 42;
 
-    GrB_Index m = 20000;
+    GrB_Index m = 21000;
     GrB_Info code = LAGraph_Random_Matrix(&vert, GrB_FP64, m, 1, 0.08, seed, NULL);
     if (code != GrB_SUCCESS) {
         printf("error vert: %d\n", code);
     }
 
-    GrB_Index n = 20000;
+    GrB_Index n = 22000;
     GrB_Matrix_new(&ones, GrB_FP64, 1, n);
     for (GrB_Index j = 0; j < n; j++) {
         code = GrB_Matrix_setElement_FP64(ones, 1.0, 0, j);

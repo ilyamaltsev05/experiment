@@ -1,6 +1,8 @@
 # Замеры потребления памяти реализацией Кронекера с маской (WIP)
 
-Рассмотрены два вида входов:
+Рассмотрены три вида входов:
+ - Произведение Кронекера - изолированный шаг с masked mxm из PageRank_demo, на вход подается матрица из
+ SuiteSparse Matrix Collection, она же служит маской.
  - Произведение Кронекера матриц, подобных тем, что
  встречаются в masked mxm PageRank_demo - матрица m-на-1 на матрицу
  1-на-n из единиц со случайной маской подходящего размера.
@@ -10,7 +12,35 @@
 
 Воспроизвести можно с помощью https://github.com/ilyamaltsev05/experiment
 
-## 1) Вычисление, эквивалентное mxm в PageRank_demo.
+## 1) Вычисление, эквивалентное mxm в PageRank_demo, с маской из SuiteSparse MAtrix Collection.
+
+### Peak memory consumption
+
+| input\implementation | default | masked | masked mxm
+|---|---|---|---|
+| YaleB_10NN (17404 nnz) | 49,5 MB | 3,3 MB | 3,3 MB
+| USpowerGrid (6594 nnz) | 197,6 MB | 2,3 MB | 2,9 MB
+| p2p-Gnutella09 (26013 nnz) | 300,1 MB | 2,7 MB | 3,7 MB
+| p2p-Gnutella31 (147892 nnz) | 12,3 GB | 14,2 MB | 14,5 MB
+| Kohonen (12731 nnz) | 99,9 MB | 2,7 MB | 2,9 MB
+| dixmaanl (179999 nnz) | out of memory | 27,4 MB | 27,4 MB
+| Goodwin_030 (312814 nnz) | 832,7 MB | 27,2 MB | 27,2 MB
+
+### Время исполнения
+
+На 10 запусках
+
+| input\implementation | masked | masked mxm
+|---|---|---|
+| YaleB_10NN (17404 nnz) | 1,019 $\pm$ 0,075 s | 1,320 $\pm$ 0,147 s
+| USpowerGrid (6594 nnz) | 0,140 $\pm$ 0,023 s | 1,172 $\pm$ 0,170 s
+| p2p-Gnutella09 (26013 nnz) | 0,205 $\pm$ 0,023 s | 1,304 $\pm$ 0,208 s
+| p2p-Gnutella31 (147892 nnz) | 0,780 $\pm$ 0,126 s | 23,192 $\pm$ 0,428 s
+| Kohonen (12731 nnz) | 0,157 $\pm$ 0,051 s | 0,338 $\pm$ 0,049 s
+| dixmaanl (179999 nnz) | 7,557 $\pm$ 0,264 s | 87,414 $\pm$ 2,685 s
+| Goodwin_030 (312814 nnz) | 6,869 $\pm$ 0,203 s | 9,135 $\pm$ 0,196 s
+
+## 2) Вычисление, эквивалентное mxm в PageRank_demo.
 
 Сравнение существующей реализации с применением маски после с новой на примере вычисления произведения Кронекера матрицы m-на-1 и матрицы из единиц 1-на-n. Матрица m-на-1 и маска построены с помощью LAGraph_Random_Matrix.
 

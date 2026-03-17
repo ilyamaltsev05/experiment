@@ -15,3 +15,6 @@ kron_gen:
 
 kron_run:
 	gcc ./kron/kron_run.c -o kron_run -I/usr/local/include/suitesparse -lgraphblas -llagraph -llagraphx
+
+page_rank:
+	gcc ./page_rank_like.c -o page_rank -I/usr/local/include/suitesparse -lgraphblas -llagraph
